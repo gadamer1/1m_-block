@@ -131,8 +131,11 @@ bool isTriggerRule(unsigned char *buf,int size){
 				host = filter_list[i];
 				host_size = filter_list[i].length();
 				string dst_host = s.substr(n1+6,host_size);
+				cout << "dst_host:" << dst_host << endl;
 				int check = 0;
-				if(host.find(dst_host[i])){
+				if(dst_host.find(host)){
+					cout << host << endl;
+					printf("the packet is caught by filter list\n");
 					return true;
 				}
 			}
