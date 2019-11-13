@@ -11,7 +11,7 @@
 #include <string.h>
 #include <fstream>
 
-#define MAX_LENGTH 10000
+#define MAX_LENGTH 990000
 #define MAX_TOK 1000
 
 #include <libnetfilter_queue/libnetfilter_queue.h>
@@ -126,14 +126,14 @@ bool isTriggerRule(unsigned char *buf,int size){
 	if(buf[0]=='G'||buf[0]=='P'||buf[0]=='D' ||buf[0]=='O'){
 		/*check host name*/
 		int n1 = s.find("Host");
-		if(n1){
+		if(n1>=0){
 			for(int i=0;i<MAX_LENGTH;i++){
 				host = filter_list[i];
 				host_size = filter_list[i].length();
 				string dst_host = s.substr(n1+6,host_size);
 				cout << "dst_host:" << dst_host << endl;
 				int check = 0;
-				if(dst_host.find(host)){
+				if(dst_host.find(host)>=0){
 					cout << host << endl;
 					printf("the packet is caught by filter list\n");
 					return true;
